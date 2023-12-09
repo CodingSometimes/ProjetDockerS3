@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  django:
+    build: .
+    command: python manage.py runserver 0.0.0.0:6969
+    volumes:
+      - .:/app
+    ports:
+      - "6969:6969"
+    depends_on:
+      - postgres
+      - redis
+
+  postgres:
+    image: postgres:latest
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: projet
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: samilegrosbg
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+
+volumes:
+  postgres_data:
