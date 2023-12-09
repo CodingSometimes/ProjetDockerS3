@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!-- templates/authentication/login.html -->
+
+  <h2>Connexion</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Se connecter</button>
+  </form>
+
+<p>Vous n'avez pas de compte ?</p>
+<a href="{% url 'register' %}">Créer un compte</a>
+
+</body>
+</html>

@@ -14,5 +14,8 @@ COPY . /app/
 # Exposer le port sur lequel l'application s'exécute
 EXPOSE 6969
 
+# Commande pour créer et appliquer les migrations
+CMD ["python", "manage.py", "makemigrations"]
+CMD ["python", "manage.py", "migrate"]
 # Commande pour lancer l'application
 CMD ["python", "manage.py", "runserver", "0.0.0.0:6969"]

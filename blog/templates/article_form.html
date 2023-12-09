@@ -1,0 +1,6 @@
+<a href="{% url 'blog:blog_index' %}">Retour à la liste des articles</a>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Enregistrer</button>
+</form>

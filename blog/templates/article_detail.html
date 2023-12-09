@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Liste des articles{% endblock %}
+{% block content %}
+    <div>
+        <a href="{% url 'blog:blog_index' %}">Retour à la liste des articles</a>
+        <a href="{% url 'blog:update_article' article.pk %}">Modifier cet article</a>
+    </div>
+    <h2>{{ article.title }} ({{views}} vues)</h2>
+    <p>{{ article.content }}</p>
+{% endblock %}
