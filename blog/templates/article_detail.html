@@ -3,9 +3,32 @@
 {% block title %}Liste des articles{% endblock %}
 {% block content %}
     <div>
-        <a href="{% url 'blog:blog_index' %}">Retour à la liste des articles</a>
-        <a href="{% url 'blog:update_article' article.pk %}">Modifier cet article</a>
+        <a class="btn btn-primary" href="{% url 'blog:blog_index' %}">Retour à la liste des articles</a>
+        <a class="btn btn-primary" href="{% url 'blog:update_article' article.pk %}">Modifier cet article</a>
     </div>
     <h2>{{ article.title }} ({{views}} vues)</h2>
     <p>{{ article.content }}</p>
+    <hr>
+    <h3>Commentaires</h3>
+    {% for comment in article.comment_set.all %}
+        <p>{{ comment.content }}</p>
+    {% endfor %}
+
+{% if user.is_authenticated %}
+<form method="post">
+  {% csrf_token %}
+  {{ comment_form.as_p }}
+  <button class="btn btn-primary" type="submit">Ajouter un commentaire</button>
+</form>
+{% else %}
+<p>Vous devez être connecté pour ajouter un commentaire</p>
+{% endif %}
+<hr>
+{% for comment in comments %}
+  <div class="comment">
+      <p>{{ comment.author }} (publié le {{comment.created_at|date:"d/m/Y à H:i"}})</p>
+      <p>{{ comment.content }}</p>
+      <p><i class="bi bi-hand-thumbs-up"></i>{{ comment.likes }} <i class="bi bi-hand-thumbs-down"></i>{{ comment.dislikes }}</p>
+  </div>
+{% endfor %}
 {% endblock %}
